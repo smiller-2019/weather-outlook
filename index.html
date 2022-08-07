@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    ></script>
+
+    <script defer src="./assets/js/index.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Weather Outlook</title>
+  </head>
+
+  <body class="flex-column min-100-vh">
+    <header id="header-main" class="flex-row">
+      <h1 id="header-main-h1">Weather Dashboard</h1>
+    </header>
+
+    <main class="flex-row justify-space-between">
+      <div class="col-12 col-md-4">
+        <section class="card">
+          <h3 class="card-header text-uppercase">Search For a City:</h3>
+          <form id="city-form" class="card-body">
+            <input
+              name="city"
+              id="city-input"
+              type="text"
+              autofocus="true"
+              class="form-input"
+            />
+            <button type="submit" class="btn">Search</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <div id="city-buttons" class="card-body">
+            <!-- data-language are variables which will be used in javascript -->
+            <!-- <button data-language="austin" class="btn">Austin</button>
+            <button data-language="chicago" class="btn">Chicago</button>
+            <button data-language="new-york" class="btn">New York</button> -->
+          </div>
+        </section>
+      </div>
+      <section class="col-12 col-md-8">
+        <div>
+          <h2 class="city-container-current-h2 weather"></h2>
+          <!-- the div is empty to allow for dynamic html creations via javascript -->
+          <ul
+            id="city-container-current-ul"
+            class="city-container-current"
+          ></ul>
+        </div>
+
+        <div class="flex-row">
+          <div>
+            <h3 class="Forecast-5-day weather"></h3>
+            <div id="city-container-1-day" class="column-group"></div>
+          </div>
+          <div id="city-container-2-day" class="column-group"></div>
+          <div id="city-container-3-day" class="column-group"></div>
+          <div id="city-container-4-day" class="column-group"></div>
+          <div id="city-container-5-day" class="column-group"></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
