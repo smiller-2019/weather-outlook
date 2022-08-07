@@ -5,6 +5,7 @@ let card = document.querySelector(".card");
 let cityButtons = document.querySelector("#city-buttons");
 let btn = document.querySelector(".btn");
 let selectionForm = document.querySelector(".selection-form");
+let currentDayContainer = document.querySelector("#current-day-container");
 let cityContainerCurrentUl = document.querySelector(
   "#city-container-current-ul"
 );
@@ -122,18 +123,47 @@ function displayWeather(data, city) {
         "border: 0.3rem solid var(brown)"
       );
       // format the data to be displayed
-      cityContainerCurrentH2.textContent = city;
+      cityContainerCurrentH2.textContent =
+        city + " " + moment.unix(data.current.dt).format("DD/MM/YYYY");
+      cityContainerCurrentH2.setAttribute(
+        "style",
+        "display:inline-flex; font-size:5rem;"
+      );
+      let currentDayIcon = data.current.weather[0].icon;
+      currentDayWeatherIcon = document.createElement("img");
+      currentDayWeatherIcon.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${currentDayIcon}@2x.png`
+      );
+      currentDayWeatherIcon.setAttribute("style", "width:4%;");
+      currentDayContainer.insertBefore(
+        currentDayWeatherIcon,
+        cityContainerCurrentUl
+      );
+
       temp.textContent = "Temp: " + String(data.current.temp) + " F";
       humidity.textContent =
         "Humidity: " + String(data.current.humidity) + " %";
       wind.textContent = "Wind: " + String(data.current.wind_speed) + " MPH";
-      // add the formated date to the current city section of the display
+      // add the formated data to current city section of the display
+
       cityContainerCurrentUl.appendChild(temp);
       cityContainerCurrentUl.appendChild(humidity);
       cityContainerCurrentUl.appendChild(wind);
       // add the uvi to the display
       uvIndex.textContent = "UV Index: " + data.current.uvi;
+      if (parseInt(data.current.uvi) < 3)
+        uvIndex.setAttribute("class", "green uv-class");
+      else if (parseInt(data.current.uvi) < 6)
+        uvIndex.setAttribute("class", "yellow uv-class");
+      else if (parseInt(data.current.uvi) < 8)
+        uvIndex.setAttribute("class", "orange uv-class");
+      else if (parseInt(data.current.uvi) < 11)
+        uvIndex.setAttribute("class", "red uv-class");
+      else uvIndex.setAttribute("class", "purple uv-class");
+
       cityContainerCurrentUl.appendChild(uvIndex);
+      currentDayContainer.setAttribute("style", " border: 0.2rem solid brown;");
 
       // Clear cityContainerDay element
       for (let i = 1; i < 6; i++) {
@@ -165,19 +195,26 @@ function displayWeather(data, city) {
         // align the 5 day forecast
         if (i > 1) {
           title[i].textContent = "";
+          // define style for lists
+          title[i].setAttribute(
+            "style",
+            "list-style:none;padding-left:2rem;margin-top:7rem;"
+          );
           day[i].setAttribute(
             "style",
-            "list-style:none;padding-left:2rem;margin-top:3rem;"
+            "list-style:none;padding-left:2rem;margin-top:2rem;"
           );
         } else {
           title[i].textContent = "5 Day Forcast:";
+          title[i].setAttribute(
+            "style",
+            "font-size:3rem; font-weight:800;list-style:none;padding-left:2rem;margin-top:3rem"
+          );
           day[i].setAttribute(
             "style",
             "list-style:none;padding-left:2rem;margin-top:1rem;"
           );
         }
-        // define style for lists
-        title[i].setAttribute("style", "list-style:none;padding-left:2rem;");
 
         dailyTemp[i].setAttribute(
           "style",
@@ -224,6 +261,7 @@ function displayWeather(data, city) {
         cityContainerDay.appendChild(dailyTemp[i]);
         cityContainerDay.appendChild(dailyWind[i]);
         cityContainerDay.appendChild(dailyHumidity[i]);
+
         // }
       }
     });

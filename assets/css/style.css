@@ -108,11 +108,31 @@ main {
 .weather {
   margin-left: 2rem;
 }
-/* 
-.Forecast-5-day {
-  margin-top: 2rem;
-} */
 
+.green {
+  background-color: #16a34a;
+}
+
+.yellow {
+  background-color: #fde047;
+}
+
+.orange {
+  background-color: #ea580c;
+}
+
+.red {
+  background-color: #dc2626;
+}
+
+.purple {
+  background-color: #7e22ce;
+}
+
+.uv-class {
+  width: 15rem;
+  height: 2rem;
+}
 /* CARDS */
 .card {
   margin: 0 0 2rem 0;
