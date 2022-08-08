@@ -263,7 +263,7 @@ function displayWeather(data, city) {
 
         cityContainerDay.setAttribute(
           "style",
-          "font-size:2.5rem;color:#fff;background-color: var(--weather-card);"
+          "font-size:2.5rem;color:#fff;background-color: var(--weather-card);margin-bottom:5%;"
         );
 
         // add the data to the correctly formated style elements for the 5 day forecast section
