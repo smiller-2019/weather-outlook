@@ -6,6 +6,8 @@ let cityButtons = document.querySelector("#city-buttons");
 let btn = document.querySelector(".btn");
 let selectionForm = document.querySelector(".selection-form");
 let currentDayContainer = document.querySelector("#current-day-container");
+let title = document.createElement("h3");
+let forecast5Day = document.querySelector(".Forecast-5-day");
 
 // create current weather elements
 let cityContainerCurrentUl = document.querySelector(
@@ -142,20 +144,19 @@ function displayWeather(data, city) {
         "style",
         "border: 0.3rem solid var(brown);font-size:2.5rem;"
       );
-      // format the data to be displayed
+      // format style for data to be displayed for the current weather section
       cityContainerCurrentH2.textContent =
         city + " " + moment.unix(data.current.dt).format("DD/MM/YYYY");
       cityContainerCurrentH2.setAttribute(
         "style",
-        "display:inline-flex; font-size:5rem;"
+        "display:inline-flex; font-size:4rem;"
       );
       let currentDayIcon = data.current.weather[0].icon;
-      // currentDayWeatherIcon = document.createElement("img");
       currentDayWeatherIcon.setAttribute(
         "src",
         `http://openweathermap.org/img/wn/${currentDayIcon}@2x.png`
       );
-      currentDayWeatherIcon.setAttribute("style", "width:4%;");
+      currentDayWeatherIcon.setAttribute("style", "width:4.5%;");
       currentDayContainer.insertBefore(
         currentDayWeatherIcon,
         cityContainerCurrentUl
@@ -165,13 +166,11 @@ function displayWeather(data, city) {
       humidity.textContent =
         "Humidity: " + String(data.current.humidity) + " %";
       wind.textContent = "Wind: " + String(data.current.wind_speed) + " MPH";
-      // add the formated data to current city section of the display
-
+      // aadd current weather style to current weather section
       cityContainerCurrentUl.appendChild(temp);
       cityContainerCurrentUl.appendChild(humidity);
       cityContainerCurrentUl.appendChild(wind);
       // add the uvi to the display
-
       uvIndexTitle.textContent = "UV Index: ";
       uvIndex.textContent = data.current.uvi;
       if (parseInt(data.current.uvi) < 3)
@@ -183,7 +182,7 @@ function displayWeather(data, city) {
       else if (parseInt(data.current.uvi) < 11)
         uvIndex.setAttribute("class", "red uv-class");
       else uvIndex.setAttribute("class", "purple uv-class");
-
+      // add uv index title and data to current weather section
       cityContainerCurrentUl.appendChild(uvIndexTitle);
       cityContainerCurrentUl.appendChild(uvIndex);
       currentDayContainer.setAttribute("style", " border: 0.2rem solid brown;");
@@ -202,12 +201,10 @@ function displayWeather(data, city) {
       let dailyWind = [];
       let dailyHumidity = [];
       let dailyWeatherIcon = [];
-      let title = "";
 
       //get daily weather forecast over 5 days: data, icon, temperature, wind and humidity
       for (let i = 1; i < 6; i++) {
         // create 5 day forecast list
-        title = document.createElement("h3");
         day[i] = document.createElement("li");
         dailyTemp[i] = document.createElement("li");
         dailyWind[i] = document.createElement("li");
@@ -215,30 +212,18 @@ function displayWeather(data, city) {
         dailyWeatherIcon[i] = document.createElement("img");
         day[i].textContent = moment.unix(data.daily[i].dt).format("DD/MM/YYYY");
 
-        // align the 5 day forecast
-        if (i > 1) {
-          // title.textContent = "";
+        // apply title and style for 5 day forecast section
+        if (i === 1) {
           // define style for lists
-          title.setAttribute(
-            "style",
-            "list-style:none;padding-left:2rem;margin-top:7rem;"
-          );
-          day[i].setAttribute(
-            "style",
-            "list-style:none;padding-left:2rem;margin-top:2rem;"
-          );
-        } else {
           title.textContent = "5 Day Forcast:";
           title.setAttribute(
             "style",
-            "font-size:3rem; font-weight:800;list-style:none;padding-left:2rem;margin-top:3rem"
+            "font-size:3rem; font-weight:800;padding:2rem;"
           );
-          day[i].setAttribute(
-            "style",
-            "list-style:none;padding-left:2rem;margin-top:1rem;"
-          );
+          forecast5Day.appendChild(title);
         }
-
+        // apply styles for 5 day forecast section
+        day[i].setAttribute("style", "list-style:none;padding:2rem;");
         dailyTemp[i].setAttribute(
           "style",
           "list-style:none;padding-left:2rem;padding-bottom:2rem;"
@@ -275,9 +260,13 @@ function displayWeather(data, city) {
         let cityContainerDay = document.querySelector(
           `#city-container-${i}-day`
         );
-        cityContainerDay.setAttribute("style", "font-size:2.5rem;");
-        // add the data to the correctly formated element for the 5 day forecast display
-        cityContainerDay.appendChild(title);
+
+        cityContainerDay.setAttribute(
+          "style",
+          "font-size:2.5rem;color:#fff;background-color: var(--weather-card);"
+        );
+
+        // add the data to the correctly formated style elements for the 5 day forecast section
         cityContainerDay.appendChild(day[i]);
         cityContainerDay.appendChild(dailyWeatherIcon[i]);
         cityContainerDay.appendChild(dailyTemp[i]);

@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -30,12 +29,12 @@
     <header id="header-main" class="flex-row">
       <h1 id="header-main-h1">Weather Dashboard</h1>
     </header>
-
+    <!-- section for inputting city to search -->
     <main class="flex-row justify-space-between">
       <div class="col-12 col-md-4">
         <section class="card">
-          <h3 class="card-header text-uppercase">Search For a City:</h3>
-          <form id="city-form" class="card-body">
+          <h2 class="card-header text-uppercase">Search For a City:</h2>
+          <form id="city-form" class="card-body border-bottom-card">
             <input
               name="city"
               id="city-input"
@@ -47,35 +46,30 @@
             <button type="submit" class="btn submit-btn">Search</button>
           </form>
         </section>
-
-        <section class="card border-top-card">
-          <div id="city-buttons" class="card-body">
-            <!-- data-language are variables which will be used in javascript -->
-            <!-- <button data-language="austin" class="btn">Austin</button>
-            <button data-language="chicago" class="btn">Chicago</button>
-            <button data-language="new-york" class="btn">New York</button> -->
-          </div>
+        <!-- the div is empty to allow for dynamic html creations via javascript for the city search buttons-->
+        <section class="card">
+          <div id="city-buttons" class="card-body"></div>
         </section>
       </div>
       <section id="current-container-section" class="col-12 col-md-8">
         <div id="current-day-container">
           <h2 class="city-container-current-h2 weather"></h2>
-          <!-- the div is empty to allow for dynamic html creations via javascript -->
+          <!-- the div is empty to allow for dynamic html creations via javascript for the current weather-->
           <ul
             id="city-container-current-ul"
             class="city-container-current"
           ></ul>
         </div>
-
-        <div class="flex-row">
-          <div>
-            <h3 class="Forecast-5-day weather"></h3>
+        <!-- the div is empty to allow for dynamic html creations via javascript for the 5 day forecast weather-->
+        <div>
+          <h3 class="Forecast-5-day weather"></h3>
+          <div class="flex-row">
             <ul id="city-container-1-day" class="column-group"></ul>
+            <ul id="city-container-2-day" class="column-group"></ul>
+            <ul id="city-container-3-day" class="column-group"></ul>
+            <ul id="city-container-4-day" class="column-group"></ul>
+            <ul id="city-container-5-day" class="column-group"></ul>
           </div>
-          <ul id="city-container-2-day" class="column-group"></ul>
-          <ul id="city-container-3-day" class="column-group"></ul>
-          <ul id="city-container-4-day" class="column-group"></ul>
-          <ul id="city-container-5-day" class="column-group"></ul>
         </div>
       </section>
     </main>
