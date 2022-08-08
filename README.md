@@ -21,6 +21,6 @@ The following has been applied to the code:
 
 [link to deployed application](https://smiller-2019.github.io/weather-outlook/)
 
-![Screenshot of webpage](https://github.com/smiller-2019/business-day-sheduler/blob/main/assets/images/weather search-1.png)
-![Screenshot of webpage](https://github.com/smiller-2019/business-day-sheduler/blob/main/assets/images/weather search-2.png)
-![Screenshot of webpage](https://github.com/smiller-2019/business-day-sheduler/blob/main/assets/images/weather search-3.png)
+![Screenshot of webpage](https://github.com/smiller-2019/weather-outlook/blob/main/assets/images/weather search-1.png)
+![Screenshot of webpage](https://github.com/smiller-2019/weather-outlook/blob/main/assets/images/weather search-2.png)
+![Screenshot of webpage](https://github.com/smiller-2019/weather-outlook/blob/main/assets/images/weather search-3.png)
