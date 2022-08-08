@@ -241,19 +241,19 @@ function displayWeather(data, city) {
 
         dailyTemp[i].setAttribute(
           "style",
-          "list-style:none;padding-left:2rem;"
+          "list-style:none;padding-left:2rem;padding-bottom:2rem;"
         );
         dailyWind[i].setAttribute(
           "style",
-          "list-style:none;padding-left:2rem;"
+          "list-style:none;padding-left:2rem;padding-bottom:2rem;"
         );
         dailyHumidity[i].setAttribute(
           "style",
-          "list-style:none;padding-left:2rem;"
+          "list-style:none;padding-left:2rem;padding-bottom:2rem;"
         );
         dailyWeatherIcon[i].setAttribute(
           "style",
-          "list-style:none;padding-left:2rem;"
+          "list-style:none;padding-left:2rem;padding-bottom:2rem;"
         );
 
         // get the weather icon for each day
