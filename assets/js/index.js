@@ -6,32 +6,49 @@ let cityButtons = document.querySelector("#city-buttons");
 let btn = document.querySelector(".btn");
 let selectionForm = document.querySelector(".selection-form");
 let currentDayContainer = document.querySelector("#current-day-container");
+
+// create current weather elements
 let cityContainerCurrentUl = document.querySelector(
   "#city-container-current-ul"
 );
 let cityContainerCurrentH2 = document.querySelector(
   ".city-container-current-h2"
 );
-
+currentDayWeatherIcon = document.createElement("img");
 let temp = document.createElement("li");
 let wind = document.createElement("li");
 let humidity = document.createElement("li");
-let uvIndex = document.createElement("li");
-let lon = 0;
-let lat = 0;
-let listsCreated = false;
-// cities stored locally
+let uvIndex = document.createElement("p");
+let uvIndexTitle = document.createElement("p");
+// let lon = 0;
+// let lat = 0;
+
+// create global array to store searched cities locally
 let cities = [];
+// create boolean variable to identify when a city has been typed in or the button selected.
 let cityInputFlag = false;
 
 function init() {
   // get data from local storage
   createCitiesSearchButtonsStored();
 
-  temp.setAttribute("style", "list-style:none;");
-  wind.setAttribute("style", "list-style:none;");
-  humidity.setAttribute("style", "list-style:none;");
-  uvIndex.setAttribute("style", "list-style:none;");
+  temp.setAttribute(
+    "style",
+    "list-style:none;padding-top:2rem;padding-bottom:2rem;"
+  );
+  wind.setAttribute(
+    "style",
+    "list-style:none;padding-top:2rem;padding-bottom:4rem;"
+  );
+  humidity.setAttribute(
+    "style",
+    "list-style:none;padding-top:2rem;padding-bottom:2rem;"
+  );
+  uvIndexTitle.setAttribute("style", "display:inline;");
+  uvIndex.setAttribute(
+    "style",
+    "display:inline;padding-left:2rem;padding-right:2rem;border-radius:0.3rem;padding-top:1rem;padding-bottom:1rem;margin-top:3rem;"
+  );
 }
 
 // called when the submit button is clicked
@@ -82,6 +99,9 @@ function displayWeather(data, city) {
     return;
   }
 
+  let lon = 0;
+  let lat = 0;
+
   lon = data.coord.lon;
   lat = data.coord.lat;
   // retrieve the city uvi
@@ -120,7 +140,7 @@ function displayWeather(data, city) {
       // apply style to city container to be displayed
       cityContainerCurrentUl.setAttribute(
         "style",
-        "border: 0.3rem solid var(brown)"
+        "border: 0.3rem solid var(brown);font-size:2.5rem;"
       );
       // format the data to be displayed
       cityContainerCurrentH2.textContent =
@@ -130,7 +150,7 @@ function displayWeather(data, city) {
         "display:inline-flex; font-size:5rem;"
       );
       let currentDayIcon = data.current.weather[0].icon;
-      currentDayWeatherIcon = document.createElement("img");
+      // currentDayWeatherIcon = document.createElement("img");
       currentDayWeatherIcon.setAttribute(
         "src",
         `http://openweathermap.org/img/wn/${currentDayIcon}@2x.png`
@@ -151,7 +171,9 @@ function displayWeather(data, city) {
       cityContainerCurrentUl.appendChild(humidity);
       cityContainerCurrentUl.appendChild(wind);
       // add the uvi to the display
-      uvIndex.textContent = "UV Index: " + data.current.uvi;
+
+      uvIndexTitle.textContent = "UV Index: ";
+      uvIndex.textContent = data.current.uvi;
       if (parseInt(data.current.uvi) < 3)
         uvIndex.setAttribute("class", "green uv-class");
       else if (parseInt(data.current.uvi) < 6)
@@ -162,6 +184,7 @@ function displayWeather(data, city) {
         uvIndex.setAttribute("class", "red uv-class");
       else uvIndex.setAttribute("class", "purple uv-class");
 
+      cityContainerCurrentUl.appendChild(uvIndexTitle);
       cityContainerCurrentUl.appendChild(uvIndex);
       currentDayContainer.setAttribute("style", " border: 0.2rem solid brown;");
 
@@ -179,12 +202,12 @@ function displayWeather(data, city) {
       let dailyWind = [];
       let dailyHumidity = [];
       let dailyWeatherIcon = [];
-      let title = [];
+      let title = "";
 
       //get daily weather forecast over 5 days: data, icon, temperature, wind and humidity
       for (let i = 1; i < 6; i++) {
         // create 5 day forecast list
-        title[i] = document.createElement("li");
+        title = document.createElement("h3");
         day[i] = document.createElement("li");
         dailyTemp[i] = document.createElement("li");
         dailyWind[i] = document.createElement("li");
@@ -194,9 +217,9 @@ function displayWeather(data, city) {
 
         // align the 5 day forecast
         if (i > 1) {
-          title[i].textContent = "";
+          // title.textContent = "";
           // define style for lists
-          title[i].setAttribute(
+          title.setAttribute(
             "style",
             "list-style:none;padding-left:2rem;margin-top:7rem;"
           );
@@ -205,8 +228,8 @@ function displayWeather(data, city) {
             "list-style:none;padding-left:2rem;margin-top:2rem;"
           );
         } else {
-          title[i].textContent = "5 Day Forcast:";
-          title[i].setAttribute(
+          title.textContent = "5 Day Forcast:";
+          title.setAttribute(
             "style",
             "font-size:3rem; font-weight:800;list-style:none;padding-left:2rem;margin-top:3rem"
           );
@@ -252,17 +275,14 @@ function displayWeather(data, city) {
         let cityContainerDay = document.querySelector(
           `#city-container-${i}-day`
         );
+        cityContainerDay.setAttribute("style", "font-size:2.5rem;");
         // add the data to the correctly formated element for the 5 day forecast display
-        // if (!listsCreated) {
-        //   if (i == 5) listsCreated = true;
-        cityContainerDay.appendChild(title[i]);
+        cityContainerDay.appendChild(title);
         cityContainerDay.appendChild(day[i]);
         cityContainerDay.appendChild(dailyWeatherIcon[i]);
         cityContainerDay.appendChild(dailyTemp[i]);
         cityContainerDay.appendChild(dailyWind[i]);
         cityContainerDay.appendChild(dailyHumidity[i]);
-
-        // }
       }
     });
 }
@@ -292,6 +312,10 @@ function renderCities() {
     // create button for the city
     let button = document.createElement("button");
     button.setAttribute("class", "btn");
+    button.setAttribute(
+      "style",
+      "background-color:#a3a3a3;margin-bottom:1rem;color: var(--primary);"
+    );
     button.textContent = city;
 
     // add new city to the first in the list of buttons already on display

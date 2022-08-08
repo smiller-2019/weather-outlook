@@ -1,9 +1,9 @@
 :root {
-  --primary: #ccdad1;
+  --primary: #333;
   --secondary: #9caea9;
-  --tertiary: #788585;
+  --tertiary: #e0f2fe;
   --light-dark: #6f6866;
-  --dark: #38302e;
+  --dark: #0f172a;
   --border-radius: 0.3rem;
 }
 
@@ -63,9 +63,10 @@ main {
 }
 
 .btn {
-  font-size: 1.3rem;
+  font-size: 2rem;
+  font-weight: 600;
   text-decoration: none;
-  padding: 0.6rem 0.5rem;
+  padding: 1rem;
   width: 100%;
   display: block;
   margin: 0.5rem 0;
@@ -74,7 +75,7 @@ main {
   border: none;
   outline: none;
   background-color: var(--light-dark);
-  box-shadow: 0.3rem 0.3rem var(--dark);
+  /* box-shadow: 0.3rem 0.3rem var(--dark); */
   transform: translate(-0.1rem, -0.1rem);
 }
 
@@ -89,6 +90,11 @@ main {
   display: inline;
 }
 
+.submit-btn {
+  background-color: #60a5fa;
+  color: #fff;
+}
+
 /* FORM */
 
 .form-input,
@@ -100,7 +106,7 @@ main {
   width: 100%;
   padding: 3%;
   margin: 0.5rem 0;
-  font-size: 1.2rem;
+  font-size: 2rem;
   border: 0.2rem solid var(--light-dark);
   border-radius: var(--border-radius);
 }
@@ -136,19 +142,22 @@ main {
 /* CARDS */
 .card {
   margin: 0 0 2rem 0;
-  border: 0.3rem solid var(--dark);
   border-radius: var(--border-radius);
 }
 
+.border-top-card {
+  border-top: 0.3rem solid var(--dark);
+}
 .card-header {
-  color: var(--primary);
-  background-color: var(--dark);
+  color: #333;
+  /* background-color: var(--dark); */
+  margin-left: 2rem;
   padding: 2.5%;
   border-radius: calc(0.18rem - 0.1rem) calc(0.18rem - 0.1rem) 0 0;
 }
 
 .card-body {
-  padding: 2.5%;
+  padding: 3.5%;
 }
 
 .col-auto {
